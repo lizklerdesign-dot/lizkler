@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bibliothèques au Brésil</title>
+</head>
+<body>
+<h1>Combien de bibliothèques existe-t-il au Brésil ?</h1>
+
+<p>
+    Découvrez sur la carte les principales bibliothèques du Brésil.
+</p>
+
+<h2>Requête Wikidata</h2>
+
+<pre><code>
+    #defaultView:Map
+SELECT ?item ?itemLabel ?coord ?image WHERE {
+
+Filter for items that are libraries (or subclasses)
+
+?item wdt:P31/wdt:P279* wd:Q7075 ;
+# Located in Brazil
+wdt:P17 wd:Q155 ;
+# Must have geographic coordinates to appear on the map
+wdt:P625 ?coord ;
+# Must have an associated image
+wdt:P18 ?image .
+
+Fetch labels in English (with Portuguese as fallback)
+
+SERVICE wikibase:label { bd:serviceParam wikibase:language “en,pt”. }
+}
+<h2>Visualisation des données</h2>
+
+<div>
+    <iframe 
+        style="width: 80vw; height: 50vh; border: none;" 
+        src="https://query.wikidata.org/embed.html#%23defaultView%3AMap%0ASELECT%20%3Fitem%20%3FitemLabel%20%3Fcoord%20%3Fimage%20WHERE%20%7B%0A%20%20%23%20Filter%20for%20items%20that%20are%20libraries%20(or%20subclasses)%0A%20%20%3Fitem%20wdt%3AP31%2Fwdt%3AP279*%20wd%3AQ7075%20%3B%0A%20%20%20%20%20%20%20%20%23%20Located%20in%20Brazil%0A%20%20%20%20%20%20%20%20wdt%3AP17%20wd%3AQ155%20%3B%0A%20%20%20%20%20%20%20%20%23%20Must%20have%20geographic%20coordinates%20to%20appear%20on%20the%20map%0A%20%20%20%20%20%20%20%20wdt%3AP625%20%3Fcoord%20%3B%0A%20%20%20%20%20%20%20%20%23%20Must%20have%20an%20associated%20image%0A%20%20%20%20%20%20%20%20wdt%3AP18%20%3Fimage%20.%0A%20%20%20%20%20%20%20%20%0A%20%20%23%20Fetch%20labels%20in%20English%20(with%20Portuguese%20as%20fallback)%0A%20%20SERVICE%20wikibase%3Alabel%20%7B%20bd%3AserviceParam%20wikibase%3Alanguage%20%22en%2Cpt%22.%20%7D%0A%7D" 
+        referrerpolicy="origin" 
+        sandbox="allow-scripts allow-same-origin allow-popups">
+    </iframe>
+</div></body>
+</html>
