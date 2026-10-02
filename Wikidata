@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Bibliothèques au Brésil - Requête Wikidata</title>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 900px; margin: 40px auto; padding: 0 20px; line-height: 1.6; color: #333; }
+        h1 { color: #2c3e50; border-bottom: 2px solid #eee; padding-bottom: 10px; }
+        h2 { color: #34495e; margin-top: 30px; }
+        pre { background: #f8f9fa; padding: 15px; border-radius: 6px; border: 1px solid #e1e4e8; overflow-x: auto; }
+        code { font-family: Consolas, Monaco, monospace; }
+        .preview img { max-width: 100%; height: auto; border: 1px solid #ddd; border-radius: 6px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+    </style>
+</head>
+<body>
+
+    <h1>Thème : Bibliothèques au Brésil (Wikidata)</h1>
+
+    <h2>Code SPARQL</h2>
+    <pre><code>SELECT ?Brazil ?image ?title WHERE {
+  SERVICE wikibase:label { bd:serviceParam wikibase:language "[AUTO_LANGUAGE],mul,en". }
+  ?Brazil wdt:P17 wd:Q155;
+          wdt:P31 wd:Q7075.
+  OPTIONAL { ?Brazil wdt:P18 ?image. }
+  OPTIONAL { ?Brazil wdt:P1476 ?title. }
+}
+LIMIT 100</code></pre>
+
+    <h2>Aperçu visuel des données obtenues</h2>
+    <div class="preview">
+        <img src="apercu.jpg" alt="Grille d'images des bibliothèques au Brésil">
+    </div>
+
+</body>
+</html>
